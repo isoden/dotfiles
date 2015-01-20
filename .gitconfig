@@ -1,0 +1,23 @@
+[user]
+    name  = isoda yu
+    email = isoda@maboroshi.biz
+[core]
+    excludesfile = /Users/isoden/.gitignore_global
+    compression = 0
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[http]
+    postBuffer = 524288000
+[alias]
+    co = checkout
+    st = status
+    b  = branch
+    cm = commit
+    a  = add
+    today = log --oneline --since='12 hour ago'
+[credential]
+	helper = osxkeychain
