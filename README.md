@@ -1,0 +1,6 @@
+dotfiles
+===
+
+```
+sh init.sh
+```
