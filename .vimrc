@@ -1,39 +1,41 @@
 "------------------------------
 " Vim settings
 "------------------------------
-"Viとの互換off
-set nocompatible
 
 "NeoBundleの設定
-filetype off
 if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim
-            call neobundle#rc(expand('~/.vim/bundle/'))
+  set runtimepath+=~/.vim/bundle/neobundle.vim
 endif
 
-"NeoBundleでインストールするプラグイン
-NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'cakebaker/scss-syntax.vim'
-NeoBundle 'digitaload/vim-jade'
-NeoBundle 'terryma/vim-multiple-cursors'
-NeoBundle 'othree/html5.vim'
-NeoBundle 'wavded/vim-stylus'
-NeoBundle 'Townk/vim-autoclose'
+call neobundle#begin(expand('~/.vim/bundle'))
+
+"NeoBundleでインストールするプラグイン一覧
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundleFetch 'Shougo/vimproc'
+NeoBundleFetch 'Yggdroot/indentLine'
+NeoBundleFetch 'cakebaker/scss-syntax.vim'
+NeoBundleFetch 'digitaload/vim-jade'
+NeoBundleFetch 'terryma/vim-multiple-cursors'
+NeoBundleFetch 'othree/html5.vim'
+NeoBundleFetch 'wavded/vim-stylus'
+NeoBundleFetch 'Townk/vim-autoclose'
+NeoBundleFetch 'tomasr/molokai'
+NeoBundleFetch 'Xuyuanp/git-nerdtree'
+NeoBundleFetch 'mattn/emmet-vim'
+
+call neobundle#end()
 
 filetype plugin indent on
-filetype indent on
 
-"colorscheme を jellybeansに設定
-colorscheme jellybeans
+"colorschemeをmolokaiに設定
+colorscheme molokai
 syntax on
 
-set autoindent
-set smartindent
-set cindent
+" バックスペースでなんでも消せるように
+set backspace=indent,eol,start
+set cindent       " ?
 
-set tabstop=4
+set tabstop=4     " :
 set shiftwidth=4
 set softtabstop=4
 set expandtab
@@ -42,7 +44,7 @@ set relativenumber
 
 set visualbell
 
-set guifont=Ricty-Regular:h14
+set guifont=Consolas:h14
 
 let g:indentLine_color_term=222
 let g:indentLine_color_gui="#405060"
@@ -53,6 +55,7 @@ let g:indentLine_char="¦"
 "------------------------------
 " バックアップファイルを指定したフォルダに作成する
 set backupdir=$HOME/.vim/.backup
+
 " スワップファイルを指定したフォルダに作成する
 let &directory=&backupdir
 
@@ -71,3 +74,18 @@ endif
 autocmd FileType html inoremap <silent> <buffer> </ </<C-x><C-o>
 set statusline=%l
 set laststatus=2
+
+" マウス操作を有効化
+set mouse=a
+set ttymouse=xterm2
+
+" emmet
+" let g:user_emmet_expandabbr_key='<Ctrl-e>'
+
+
+" 基本設定
+source $HOME/.vim/settings/basic.vim
+
+" 表示、見た目
+source $HOME/.vim/settings/appearance.vim
+

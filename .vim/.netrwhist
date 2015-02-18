@@ -1,10 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/Users/isoden/Desktop/jQuery'
-let g:netrw_dirhist_2='/Users/isoden/Documents/Repositories/mbrs-webrtc1'
-let g:netrw_dirhist_3='/Users/isoden/Dropbox/mbrs_1407_engineer-factory/htdocs-engineer-factory/sp'
-let g:netrw_dirhist_4='/Users/isoden/Documents/Repositories/todos'
-let g:netrw_dirhist_5='/Users/isoden/Dropbox/mbrs_1407_engineer-factory/htdocs-engineer-factory/sp'
-let g:netrw_dirhist_6='/Users/isoden/Dropbox/mbrs_1407_engineer-factory/htdocs-engineer-factory'
-let g:netrw_dirhist_7='/Users/isoden/Dropbox/mbrs_1407_engineer-factory'
-let g:netrw_dirhist_8='/Users/isoden/Dropbox'
+let g:netrw_dirhist_cnt =0

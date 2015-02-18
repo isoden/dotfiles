@@ -1,1 +1,0 @@
-/Users/isoden/dotfiles/.vim

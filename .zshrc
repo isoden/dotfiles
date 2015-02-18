@@ -133,7 +133,7 @@ alias p='python -m SimpleHTTPServer'
 alias s='php -S'
 alias t='touch'
 alias g='git'
-
+alias vi='vim'
 # -------------------------------------
 # キーバインド
 # -------------------------------------
