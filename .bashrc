@@ -15,20 +15,14 @@ export GOPATH=$HOME
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
+# added by travis gem
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
-# added by travis gem
-[ -f /Users/isodayuu/.travis/travis.sh ] && source /Users/isodayuu/.travis/travis.sh
-
 # git-prompt.sh の読み込み
-if [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
-  source /usr/local/etc/bash_completion.d/git-prompt.sh
-fi
+[ -f /usr/local/etc/bash_completion.d/git-prompt.sh ] && source /usr/local/etc/bash_completion.d/git-prompt.sh
 
 # git-completion.bash の読み込み
-if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-  source /usr/local/etc/bash_completion.d/git-completion.bash
-fi
+[ -f /usr/local/etc/bash_completion.d/git-completion.bash ] && source /usr/local/etc/bash_completion.d/git-completion.bash
 
 # プロンプトに表示させる Git の情報の設定
 # unstaged files があるときに * を表示する
@@ -57,7 +51,7 @@ alias t='touch'
 alias p='python -m CGIHTTPServer'
 alias be='bundle exec'
 
-function promps {
+promps() {
   local BLUE="\[\e[1;34m\]"
   local GREEN="\[\e[1;32m\]"
   local WHITE="\[\e[00m\]"
@@ -89,3 +83,4 @@ auto_cdls() {
 }
 
 PROMPT_COMMAND="$PROMPT_COMMAND"$'\n'auto_cdls
+
