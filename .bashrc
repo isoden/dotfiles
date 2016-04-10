@@ -23,6 +23,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # ======================================
 # alias
 # ======================================
+alias cd='builtin cd "$@" && ls'
 alias ls='ls -F'
 alias rm='rmtrash'
 alias vi='vim'
@@ -36,15 +37,14 @@ function parse_git_branch {
 }
 
 function promps {
-  # 色は気分で変えたいかもしれないので変す宣言しておく
   local BLUE="\[\e[1;34m\]"
-  local RED="\[\e[1;31m\]"
   local GREEN="\[\e[1;32m\]"
   local WHITE="\[\e[00m\]"
-  local GRAY="\[\e[1;37m\]"
   local BASE="\u@\h"
+
   PS1="${GREEN}${BASE}${WHITE}:${BLUE}\w${GREEN}\$(parse_git_branch)${BLUE}\$${WHITE} "
 }
+
 promps
 
 # ディレクトリ名のみの入力でcdできるようにする
@@ -60,3 +60,13 @@ source $HOME/bin/git-completion.bash
 
 # tmuxを自動で起動する
 [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
+
+# cd した時に ls も実行する
+auto_cdls() {
+  if [ "$OLDPWD" != "$PWD" ]; then
+    ls
+    OLDPWD="$PWD"
+  fi
+}
+
+PROMPT_COMMAND="$PROMPT_COMMAND"$'\n'auto_cdls
