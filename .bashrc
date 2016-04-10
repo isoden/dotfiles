@@ -20,6 +20,31 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # added by travis gem
 [ -f /Users/isodayuu/.travis/travis.sh ] && source /Users/isodayuu/.travis/travis.sh
 
+# git-prompt.sh の読み込み
+if [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
+  source /usr/local/etc/bash_completion.d/git-prompt.sh
+fi
+
+# git-completion.bash の読み込み
+if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+  source /usr/local/etc/bash_completion.d/git-completion.bash
+fi
+
+# プロンプトに表示させる Git の情報の設定
+# unstaged files があるときに * を表示する
+# staged files があるときに + を表示する
+GIT_PS1_SHOWDIRTYSTATE=true
+
+# untracked files があるときに % を表示する
+GIT_PS1_SHOWUNTRACKEDFILES=true
+
+# stashed files があるときに $ を表示する
+GIT_PS1_SHOWSTASHSTATE=true
+
+# カレントブランチが upstream より進んでいる時に > 、遅れている時に < 、
+# 遅れておりかつ独自の変更がある場合には <> を表示する
+GIT_PS1_SHOWUPSTREAM=auto
+
 # ======================================
 # alias
 # ======================================
@@ -32,17 +57,13 @@ alias t='touch'
 alias p='python -m CGIHTTPServer'
 alias be='bundle exec'
 
-function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
-}
-
 function promps {
   local BLUE="\[\e[1;34m\]"
   local GREEN="\[\e[1;32m\]"
   local WHITE="\[\e[00m\]"
   local BASE="\u@\h"
 
-  PS1="${GREEN}${BASE}${WHITE}:${BLUE}\w${GREEN}\$(parse_git_branch)${BLUE}\$${WHITE} "
+  PS1="${GREEN}${BASE}${WHITE}:${BLUE}\w${GREEN}\$(__git_ps1)${BLUE}\$${WHITE} "
 }
 
 promps
@@ -55,8 +76,6 @@ shopt -s globstar
 
 # cd の引数にスペルミスがあった時によしなにしてくれる
 shopt -s cdspell
-
-source $HOME/bin/git-completion.bash
 
 # tmuxを自動で起動する
 [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
