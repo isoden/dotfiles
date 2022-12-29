@@ -1,4 +1,1 @@
-$if Bash
-  set completion-ignore-case on
-$endif
-
+set completion-ignore-case on

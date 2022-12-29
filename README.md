@@ -1,6 +1,12 @@
-dotfiles
+:page_facing_up: dotfiles
 ===
 
-```
-sh init.sh
+## Requirements
+
+- [Homebrew](https://brew.sh/)
+
+## Setup
+
+```console
+./init.sh
 ```
