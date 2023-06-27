@@ -10,6 +10,10 @@
 	ps = push
 	pl = pull
 	br = branch
+	brs = br --sort=-committerdate
 	lg = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
 	amend = cm --amend --no-edit
 	rb = rebase
+	cp = cherry-pick
+[init]
+	defaultBranch = main
