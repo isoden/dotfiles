@@ -4,6 +4,7 @@
 [alias]
 	a = add
 	sw = switch
+	swi = ! git switch `git branch --sort=-committerdate | sed -e "/^*/d" | fzf`
 	st = status
 	cm = commit 
 	cmm = commit -m
