@@ -59,6 +59,15 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
+# brew, apt を最新にする
+pkgupgrade() {
+  brew update && brew upgrade && brew cleanup && brew doctor
+
+  # https://ginpen.com/2021/06/05/apt-update-release-file-is-not-valid-yet/
+  sudo hwclock --hctosys
+  sudo apt update && sudo apt upgrade -y
+}
+
 # https://zenn.dev/kaityo256/articles/open_command_on_wsl
 open() {
   if [ $# != 1 ]; then
