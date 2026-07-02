@@ -1,0 +1,7 @@
+[theme]
+name = "tokyo-night"
+
+[keys]
+prefix = "cmd+j"
+split_horizontal = "prefix+minus"
+split_vertical = "prefix+|"
