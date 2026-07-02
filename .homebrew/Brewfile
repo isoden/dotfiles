@@ -1,0 +1,44 @@
+# Load/unload environment variables based on $PWD
+brew "direnv"
+# Play, record, convert, and stream select audio and video codecs
+brew "ffmpeg"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# Distributed revision control system
+brew "git"
+# Agent multiplexer that lives in your terminal
+brew "herdr"
+# Postgres C API library
+brew "libpq"
+# Polyglot runtime manager (asdf rust clone)
+brew "mise"
+# Simple tool to make locally trusted development certificates
+brew "mkcert"
+# Selects the right Node package manager based on lockfiles
+brew "ni"
+# Pins GitHub Actions to full hashes and versions
+brew "pinact"
+# Image format providing lossless and lossy compression for web images
+brew "webp"
+# Command-line interface for 1Password
+cask "1password-cli"
+# OpenAI's coding agent that runs in your terminal
+cask "codex"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Open-source code editor
+cask "visual-studio-code"
+vscode "anthropic.claude-code"
+vscode "astro-build.astro-vscode"
+vscode "biomejs.biome"
+vscode "bradlc.vscode-tailwindcss"
+vscode "dbaeumer.vscode-eslint"
+vscode "editorconfig.editorconfig"
+vscode "esbenp.prettier-vscode"
+vscode "github.codespaces"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vsliveshare.vsliveshare"
+vscode "openai.chatgpt"
+vscode "yoavbls.pretty-ts-errors"
