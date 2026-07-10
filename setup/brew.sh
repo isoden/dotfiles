@@ -6,14 +6,31 @@ set -euo pipefail
 REPO="${0:A:h:h}"
 BREWFILE="$REPO/.homebrew/Brewfile"
 
-# init.sh から直接呼ばれた場合は brew にパスが通っていないことがある
-if [ -x /opt/homebrew/bin/brew ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
+# brew にパスを通す。
+# init.sh から直接呼ばれた場合や、インストール直後の同一シェルではまだ PATH に
+# 載っていないため、実体を直接叩いて shellenv を評価する。
+load_brew() {
+  if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    return 0
+  fi
+  return 1
+}
 
+load_brew || true
+
+# 未インストールなら公式インストーラを実行する。非対話 (sudo パスワードを
+# 入力できない) 環境では失敗しうるので、その旨を案内して中断する。
 if ! command -v brew >/dev/null; then
-  echo "Homebrew が必要です: https://brew.sh/" >&2
-  exit 1
+  echo "Homebrew が未インストールのためインストールします: https://brew.sh/"
+  NONINTERACTIVE=1 /bin/bash -c \
+    "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  # インストール直後の同一シェルには PATH が通っていないため再度読み込む。
+  if ! load_brew || ! command -v brew >/dev/null; then
+    echo "Homebrew のインストールに失敗しました。手動で確認してください: https://brew.sh/" >&2
+    exit 1
+  fi
 fi
 
 brew bundle --file "$BREWFILE"

@@ -3,10 +3,6 @@
 
 Apple Silicon の macOS 専用。
 
-## Requirements
-
-- [Homebrew](https://brew.sh/)
-
 ## Setup
 
 ```console
@@ -14,6 +10,7 @@ Apple Silicon の macOS 専用。
 ```
 
 `~` 配下に既存の実ファイル・実ディレクトリがある場合は `.bak` に退避してからリンクします。
+[Homebrew](https://brew.sh/) が未インストールの場合は公式インストーラで自動インストールします。
 
 ## Brewfile の更新
 
