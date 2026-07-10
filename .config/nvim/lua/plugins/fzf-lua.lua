@@ -10,6 +10,7 @@ return {
   cmd = "FzfLua",
   keys = {
     -- VSCode ライクに Cmd+Shift+F でプロジェクト全体を全文検索（grep）
+    -- live_grep はグロブ解析がデフォルトで有効。`検索語 -- !file` のように `--` 区切りで rg の --glob を検索時に指定できる
     { "<D-S-f>", "<cmd>FzfLua live_grep<cr>", mode = { "n", "i" }, desc = "ファイル内容を全文検索 (live_grep)" },
     -- VSCode ライクに Cmd+P でファイル名検索
     { "<D-p>", "<cmd>FzfLua files<cr>", mode = { "n", "i" }, desc = "ファイルを検索 (files)" },

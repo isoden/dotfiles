@@ -42,6 +42,7 @@ link "$REPO/.config/nvim"               "$HOME/.config/nvim"
 link "$REPO/.config/ghostty/config"     "$HOME/.config/ghostty/config"
 link "$REPO/.config/mise/config.toml"   "$HOME/.config/mise/config.toml"
 link "$REPO/.config/herdr/config.toml"  "$HOME/.config/herdr/config.toml"
+link "$REPO/.config/hunk/config.toml"   "$HOME/.config/hunk/config.toml"
 
 # Claude Code のグローバル設定。
 # ドット無しの claude/ に置くのは、リポジトリ直下の .claude/ が
