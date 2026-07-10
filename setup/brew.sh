@@ -17,6 +17,13 @@ fi
 
 brew bundle --file "$BREWFILE"
 
+# zsh 補完系 (zsh-abbr 等) を fpath に追加すると、compinit の compaudit が
+# 親ディレクトリ $(brew --prefix)/share の group-writable を insecure と判定し、
+# シェル起動のたびに警告を出す。Homebrew 標準の 0775 から group/other の書き込みを
+# 落として黙らせる。所有者 (自分) の書き込みは残るので brew の動作には影響しない。
+# formula の caveats が案内している対処と同じ。chmod は冪等なので毎回実行してよい。
+chmod go-w "$(brew --prefix)/share"
+
 # Brewfile に無いものを列挙する。--force を付けなければ削除はされず、
 # 削除対象があるときだけ終了コード 1 を返す仕様なので || true で受ける。
 cleanup_output="$(brew bundle cleanup --file "$BREWFILE" 2>/dev/null || true)"

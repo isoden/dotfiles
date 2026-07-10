@@ -33,11 +33,7 @@ link() {
   ln -fsn "$src" "$dst"
 }
 
-link "$REPO/.profile"      "$HOME/.profile"
-link "$REPO/.bash_profile" "$HOME/.bash_profile"
-link "$REPO/.bashrc"       "$HOME/.bashrc"
-link "$REPO/.bash_aliases" "$HOME/.bash_aliases"
-link "$REPO/.inputrc"      "$HOME/.inputrc"
+link "$REPO/.zshrc"        "$HOME/.zshrc"
 
 link "$REPO/.config/git/config"         "$HOME/.config/git/config"
 link "$REPO/.config/git/ignore"         "$HOME/.config/git/ignore"
