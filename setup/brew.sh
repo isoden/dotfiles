@@ -1,8 +1,9 @@
-#!/bin/bash
+#!/bin/zsh
 
 set -euo pipefail
 
-REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# ${0:A:h:h} は $0 を絶対パス化(:A)し head を2回(:h:h)で祖父ディレクトリ = repo ルート
+REPO="${0:A:h:h}"
 BREWFILE="$REPO/.homebrew/Brewfile"
 
 # init.sh から直接呼ばれた場合は brew にパスが通っていないことがある
@@ -55,7 +56,7 @@ while IFS= read -r line; do
 
   # EOF なら空扱いにして残す (set -e で落とさない)
   answer=""
-  read -r -p "Brewfile にありません。削除しますか? ($kind) $line [y/N]: " answer < /dev/tty || answer=""
+  read -r "answer?Brewfile にありません。削除しますか? ($kind) $line [y/N]: " < /dev/tty || answer=""
 
   case "$answer" in
     [yY])
