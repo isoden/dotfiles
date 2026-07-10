@@ -1,7 +1,15 @@
 -- ===== ハイライト調整 =====
 -- テーマ適用後に行番号の文字色を落として本文と差をつける
 local function apply_highlights()
-  vim.api.nvim_set_hl(0, "LineNr", { fg = "#6c6c6c", bg = "NONE" })
+  -- グレースケールで統一。現在行を明るく、他行は暗めにして差をつける。
+  -- カスタム statuscolumn では相対番号の行は LineNrAbove/LineNrBelow で
+  -- 描画されるため、この2つも揃える必要がある。
+  local dim = "#808080"  -- 他の行（relativenumber）: 暗め
+  vim.api.nvim_set_hl(0, "LineNr", { fg = dim, bg = "NONE" })
+  vim.api.nvim_set_hl(0, "LineNrAbove", { fg = dim, bg = "NONE" })
+  vim.api.nvim_set_hl(0, "LineNrBelow", { fg = dim, bg = "NONE" })
+  -- 現在行（CursorLineNr）: 明るいグレー。黄色をやめてグレースケールに。
+  vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#e0e0e0", bg = "NONE", bold = true })
 end
 vim.api.nvim_create_autocmd("ColorScheme", { callback = apply_highlights })
 

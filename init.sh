@@ -11,5 +11,8 @@ mkdir -p ~/.config/git
 ln -fs $PWD/.config/git/config ~/.config/git/config
 ln -fs $PWD/.config/git/ignore ~/.config/git/ignore
 
+# -n がないと既存ディレクトリの中にリンクが作られる
+ln -fsn $PWD/.config/nvim ~/.config/nvim
+
 . ./setup/brew.sh
 . ./setup/apt.sh

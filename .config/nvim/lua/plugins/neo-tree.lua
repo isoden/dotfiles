@@ -23,6 +23,13 @@ return {
     filesystem = {
       follow_current_file = { enabled = true }, -- 開いているファイルをツリー上で追従
       use_libuv_file_watcher = true,            -- OS のファイル監視で自動更新
+      filtered_items = {
+        hide_dotfiles = false, -- ドット始まりの不可視ファイルも常に表示
+        never_show = {
+          ".git",      -- .git ディレクトリは常に非表示（H トグルでも表示しない）
+          ".DS_Store", -- macOS のメタデータファイルは常に非表示（H トグルでも表示しない）
+        },
+      },
     },
   },
 }
