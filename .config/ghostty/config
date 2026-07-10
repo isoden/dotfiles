@@ -1,0 +1,25 @@
+# ===== Ghostty 設定 =====
+
+# Cmd+数字を端末アプリ(Neovim)へ渡すための unbind。
+# Ghostty はデフォルトで super+1..8=goto_tab:N / super+9=last_tab を持ち、
+# そのままでは Cmd+数字が横取りされ Neovim に届かない。
+# Neovim(bufferline)側でタブ番号移動に使うため、logical(super+N)と
+# physical(super+digit_N)の両系統を unbind して端末へパススルーする。
+keybind = super+1=unbind
+keybind = super+digit_1=unbind
+keybind = super+2=unbind
+keybind = super+digit_2=unbind
+keybind = super+3=unbind
+keybind = super+digit_3=unbind
+keybind = super+4=unbind
+keybind = super+digit_4=unbind
+keybind = super+5=unbind
+keybind = super+digit_5=unbind
+keybind = super+6=unbind
+keybind = super+digit_6=unbind
+keybind = super+7=unbind
+keybind = super+digit_7=unbind
+keybind = super+8=unbind
+keybind = super+digit_8=unbind
+keybind = super+9=unbind
+keybind = super+digit_9=unbind

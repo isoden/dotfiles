@@ -39,6 +39,7 @@ link "$REPO/.zshrc"        "$HOME/.zshrc"
 link "$REPO/.config/git/config"         "$HOME/.config/git/config"
 link "$REPO/.config/git/ignore"         "$HOME/.config/git/ignore"
 link "$REPO/.config/nvim"               "$HOME/.config/nvim"
+link "$REPO/.config/ghostty/config"     "$HOME/.config/ghostty/config"
 link "$REPO/.config/mise/config.toml"   "$HOME/.config/mise/config.toml"
 link "$REPO/.config/herdr/config.toml"  "$HOME/.config/herdr/config.toml"
 
