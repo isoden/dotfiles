@@ -1,3 +1,9 @@
+-- ===== リーダーキー =====
+-- キーマップ定義より前に設定する必要があるため先頭に置く
+-- （init.lua で config.options を config.lazy より先に require している）。
+vim.g.mapleader = " "      -- <leader> を Space に
+vim.g.maplocalleader = " " -- <localleader> も Space に
+
 -- ===== 行番号 =====
 vim.opt.number = true
 vim.opt.relativenumber = true
