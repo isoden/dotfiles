@@ -9,6 +9,7 @@
 	cm = commit 
 	cmm = commit -m
 	ps = push
+	pb = ! git push --set-upstream origin `git branch --show-current`
 	pl = pull
 	br = branch
 	brs = br --sort=-committerdate

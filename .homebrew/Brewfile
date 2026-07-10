@@ -1,3 +1,5 @@
+tap "olets/tap"
+tap "yusukebe/tap"
 # Load/unload environment variables based on $PWD
 brew "direnv"
 # Play, record, convert, and stream select audio and video codecs
@@ -10,18 +12,28 @@ brew "gh"
 brew "git"
 # Agent multiplexer that lives in your terminal
 brew "herdr"
+# Simple terminal UI for git commands
+brew "lazygit"
 # Postgres C API library
 brew "libpq"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
 # Simple tool to make locally trusted development certificates
 brew "mkcert"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
 # Selects the right Node package manager based on lockfiles
 brew "ni"
 # Pins GitHub Actions to full hashes and versions
 brew "pinact"
-# Image format providing lossless and lossy compression for web images
-brew "webp"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Text interface for Git repositories
+brew "tig"
+# Auto-expanding abbreviations manager for zsh, inspired by fish
+brew "olets/tap/zsh-abbr", trusted: true
+# The AI-era curl: fetch, discover, extract. One command.
+brew "yusukebe/tap/ax", trusted: true
 # Command-line interface for 1Password
 cask "1password-cli"
 # OpenAI's coding agent that runs in your terminal
@@ -30,15 +42,3 @@ cask "codex"
 cask "ghostty"
 # Open-source code editor
 cask "visual-studio-code"
-vscode "anthropic.claude-code"
-vscode "astro-build.astro-vscode"
-vscode "biomejs.biome"
-vscode "bradlc.vscode-tailwindcss"
-vscode "dbaeumer.vscode-eslint"
-vscode "editorconfig.editorconfig"
-vscode "esbenp.prettier-vscode"
-vscode "github.codespaces"
-vscode "ms-vscode-remote.remote-containers"
-vscode "ms-vsliveshare.vsliveshare"
-vscode "openai.chatgpt"
-vscode "yoavbls.pretty-ts-errors"
