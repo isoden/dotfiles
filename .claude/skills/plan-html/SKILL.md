@@ -1,6 +1,6 @@
 ---
 name: plan-html
-description: Output the plan-mode plan as a standalone HTML file and (when running under cmux) open it in a cmux browser surface for review. Use whenever entering plan mode, updating an in-progress plan, or about to call ExitPlanMode.
+description: Output the plan-mode plan as a standalone HTML file for review. Use whenever entering plan mode, updating an in-progress plan, or about to call ExitPlanMode.
 ---
 
 # Plan as HTML
@@ -23,6 +23,25 @@ Markdown より情報密度と可読性が高い。
 - インライン CSS のみ。外部 CDN や外部フォントへの依存は禁止 (オフラインで開けるように)
 - セクション構成: `Goal` / `Context` / `Approach` / `Steps` / `Risks` / `Open Questions`
 
+## 図表の活用
+
+情報が図表で明確になる場合はテキストの代わりに使う。乱用はしない。
+
+- 構造・比較・状態遷移など、文章より図表が明快なときに用いる
+- 手段の例: 表 (比較・パラメータ)、SVG (アーキテクチャ・フロー・依存関係)、
+  チェックリスト (Steps)、`<details>` (折りたたみで補足を隠す)
+- 図表は情報伝達に寄与する場合のみ。飾りとして入れない
+
+## 見た目
+
+ダークモードを基調とし、装飾は必要最低限にする。
+
+- 配色はダーク基調 (暗い背景 + 十分なコントラストの本文色)
+- 色は意味づけにのみ使う (例: Risk = 警告色、完了 = 緑)。無意味な色分けはしない
+- 情報伝達に寄与しない装飾を避ける: グラデーション、影、角丸の多用、
+  アイコンやアニメーションの過剰使用
+- 余白・行間・見出し階層で構造を示す。飾りで埋めない
+
 ## ExitPlanMode との関係
 
 ExitPlanMode のテキストには必ず次を含める (`$HOME` は実パスに展開した値で書く):
@@ -33,37 +52,9 @@ ExitPlanMode のテキストには必ず次を含める (`$HOME` は実パスに
 
 そのうえで 3〜6 行の要約を書く。長い説明は HTML 側に寄せる。
 
-## cmux 連携
-
-環境変数 `CMUX_BUNDLE_ID` が定義されている (= cmux 配下で実行されている) ときのみ以下を行う:
-
-### 初回出力時
-
-```bash
-cmux --json browser open "file://$HOME/.claude/plans/<slug>.html"
-# 返ってきた surface:N を以降の更新でも使い回す
-```
-
-surface 番号は会話のメモとして覚えておく (ファイル名と紐付けて保持)。
-
-### プラン更新時
-
-同じ surface を再 navigate してリロードする (新規タブを開かない):
-
-```bash
-cmux browser surface:N open "file://$HOME/.claude/plans/<slug>.html"
-```
-
-`open` を同じ URL で再実行すれば該当 surface が再読込される。
-新しいタブを増やさないこと。
-
-### `CMUX_BUNDLE_ID` が未定義の環境
-
-HTML 出力だけ行い、ブラウザ操作はスキップする。
-ユーザーに「`file://...` を開いてください」と一行案内する。
+HTML 出力後は、ユーザーに「`file://...` を開いてください」と一行案内する。
 
 ## やらないこと
 
 - plan モードを抜けた後の進捗報告を HTML に書き戻すこと (HTML は計画のスナップショット)
-- 複数の `surface:` を同時に開くこと
 - ExitPlanMode 本文に HTML の中身を丸ごとコピペすること (パスだけでよい)
