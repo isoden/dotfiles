@@ -40,6 +40,7 @@ brew "yusukebe/tap/ax", trusted: true
 cask "1password-cli"
 # OpenAI's coding agent that runs in your terminal
 cask "codex"
+cask "font-hackgen-nerd"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Open-source code editor
