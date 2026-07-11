@@ -20,3 +20,5 @@
 	cp = cherry-pick
 [init]
 	defaultBranch = main
+[core]
+	pager = hunk pager
