@@ -1,0 +1,8 @@
+# gh skill (https://cli.github.com/manual/gh_skill) で同期する Claude Code skills のマニフェスト。
+# 1行 1skill、空白区切りで: owner/repo skill-name commit-sha
+#
+# sha はインストール後に以下で確認できる:
+#   gh skill list --json skillName,sourceURL,version --agent claude-code --scope user
+#
+# 例:
+# vercel-labs/agent-skills web-design-guidelines 1a2b3c4d5e6f7890abcdef1234567890abcdef12

@@ -66,3 +66,7 @@ link_claude_entries hooks
 link_claude_entries scripts
 
 "$REPO/setup/brew.sh"
+
+# gh (Brewfile 経由で導入済み) の `gh skill` サブコマンドで、GitHub 配布の
+# Claude Code skills をハッシュ固定で同期する。
+"$REPO/setup/gh-skills.sh"
