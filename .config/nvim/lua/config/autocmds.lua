@@ -21,7 +21,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local function map(keys, fn, desc)
       vim.keymap.set("n", keys, fn, { buffer = buf, desc = desc })
     end
-    map("gd", vim.lsp.buf.definition, "定義へジャンプ")
+    -- gd/gy はバッファ・タブを切り替えず、フローティングウィンドウで定義元を
+    -- プレビューする（goto-preview.lua）。閉じるのは <Esc>。
+    map("gd", function() require("goto-preview").goto_preview_definition() end, "定義をプレビュー")
+    map("gy", function() require("goto-preview").goto_preview_type_definition() end, "型定義をプレビュー")
+    map("<Esc>", function() require("goto-preview").close_all_win() end, "プレビューを閉じる")
     map("gr", vim.lsp.buf.references, "参照を一覧")
     map("<leader>rn", vim.lsp.buf.rename, "シンボル名を変更")
     map("<leader>ca", vim.lsp.buf.code_action, "コードアクション")
