@@ -5,9 +5,10 @@ set -euo pipefail
 # ${0:A:h:h} は $0 を絶対パス化(:A)し head を2回(:h:h)で祖父ディレクトリ = repo ルート
 REPO="${0:A:h:h}"
 BREWFILE="$REPO/.homebrew/Brewfile"
+LOCAL_BREWFILE="$REPO/.homebrew/Brewfile.local"
 
 # brew にパスを通す。
-# init.sh から直接呼ばれた場合や、インストール直後の同一シェルではまだ PATH に
+# setup.sh から直接呼ばれた場合や、インストール直後の同一シェルではまだ PATH に
 # 載っていないため、実体を直接叩いて shellenv を評価する。
 load_brew() {
   if [ -x /opt/homebrew/bin/brew ]; then
@@ -33,7 +34,15 @@ if ! command -v brew >/dev/null; then
   fi
 fi
 
-brew bundle --file "$BREWFILE"
+# 共有の Brewfile と PC 固有の Brewfile.local (git 管理外、会社/個人PCそれぞれの
+# 専用ツール用) をマージしてから扱う。分けずに単一ファイルで運用すると、
+# 一方のPCにしか無いツールが「Brewfileに無いから削除対象」と誤検知されてしまう。
+MERGED="$(mktemp)"
+trap 'rm -f "$MERGED"' EXIT
+cat "$BREWFILE" > "$MERGED"
+[ -f "$LOCAL_BREWFILE" ] && cat "$LOCAL_BREWFILE" >> "$MERGED"
+
+brew bundle --file "$MERGED"
 
 # zsh 補完系 (zsh-abbr 等) を fpath に追加すると、compinit の compaudit が
 # 親ディレクトリ $(brew --prefix)/share の group-writable を insecure と判定し、
@@ -42,9 +51,9 @@ brew bundle --file "$BREWFILE"
 # formula の caveats が案内している対処と同じ。chmod は冪等なので毎回実行してよい。
 chmod go-w "$(brew --prefix)/share"
 
-# Brewfile に無いものを列挙する。--force を付けなければ削除はされず、
+# マージ後のファイルに無いものを列挙する。--force を付けなければ削除はされず、
 # 削除対象があるときだけ終了コード 1 を返す仕様なので || true で受ける。
-cleanup_output="$(brew bundle cleanup --file "$BREWFILE" 2>/dev/null || true)"
+cleanup_output="$(brew bundle cleanup --file "$MERGED" 2>/dev/null || true)"
 
 if [ -z "$cleanup_output" ]; then
   echo "Brewfile と同期しています。"
@@ -90,8 +99,8 @@ while IFS= read -r line; do
   esac
 done <<< "$cleanup_output"
 
-# 削除しなかったものは Brewfile 側に取り込んで同期させる
+# 削除しなかったものをどちらのファイルに反映すべきかは自動判定できない
+# (共有すべきものか、この PC 固有のものか) ため、ここでは自動で書き込まず案内のみ行う。
 if [ "$kept" -gt 0 ]; then
-  echo "削除しなかったものを Brewfile に反映します。"
-  "$REPO/setup/brew-dump.sh"
+  echo "削除しなかったものがあります。反映する場合は ./setup/brew-dump.sh を実行してください（パッケージごとに追加先を選べます）。"
 fi

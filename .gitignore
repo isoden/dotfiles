@@ -1,0 +1,3 @@
+# PC 固有 (会社/個人それぞれのマシン専用) のツールを書く場所。
+# setup/brew.sh が共有 Brewfile とマージして扱う。
+/.homebrew/Brewfile.local

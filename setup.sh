@@ -31,7 +31,9 @@ link() {
   fi
 
   mkdir -p "$(dirname "$dst")"
-  ln -fsn "$src" "$dst"
+  if ! ln -fsn "$src" "$dst"; then
+    echo "リンク作成に失敗しました: $src -> $dst" >&2
+  fi
 }
 
 link "$REPO/.zshrc"        "$HOME/.zshrc"
