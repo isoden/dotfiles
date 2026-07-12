@@ -13,6 +13,11 @@ local function apply_highlights()
 end
 vim.api.nvim_create_autocmd("ColorScheme", { callback = apply_highlights })
 
+-- ===== LSP 診断表示 =====
+-- virtual_text は Neovim のデフォルトが false のため、型エラー等をサイン
+-- カラムの記号だけでなく行末メッセージでもその場で読めるよう明示的に有効化する。
+vim.diagnostic.config({ virtual_text = true })
+
 -- ===== LSP キーマップ =====
 -- 言語サーバーがバッファに接続したタイミングで操作キーを割り当てる
 vim.api.nvim_create_autocmd("LspAttach", {
