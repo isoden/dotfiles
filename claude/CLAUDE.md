@@ -69,6 +69,8 @@ _Supports: Values.Integrity, Values.Simplicity_
 
 - 実装タスクでは常にTDDを採用せよ。
 - TDD規律は例外なく遵守せよ。
+- テストコードは AAA（Arrange-Act-Assert）パターンで構造化し、各ブロックにその言語のコメント記法で `Arrange` / `Act` / `Assert` のラベルを必ず付けよ（例: JS なら `// Arrange`、zsh/Python なら `# Arrange`）。構造ラベルであり、Context-Colocated Comments の「自明な What」制限の対象外。
+- 同型のケース（入力と期待値のペア）を複数検証するテストは、コピペで並べずパラメタライズドテストにまとめよ（例: Vitest/Jest なら `test.each`）。
 - コミットメッセージは「何が変わったか」「なぜか」に集中せよ。
 
 ### Context-Colocated Comments
