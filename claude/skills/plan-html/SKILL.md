@@ -1,6 +1,9 @@
 ---
 name: plan-html
 description: Output the plan-mode plan as a standalone HTML file for review. Use whenever entering plan mode, updating an in-progress plan, or about to call ExitPlanMode.
+# model は指定しない: 省略時 inherit でセッションモデル (通常最上位) を使う。
+# opus 固定は Fable 等の上位モデル使用時にプランだけダウングレードするため却下 (2026-07-15)。
+effort: max
 ---
 
 # Plan as HTML
