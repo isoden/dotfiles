@@ -1,7 +1,7 @@
 theme = "auto"                # テーマ id / "auto"(端末背景に追従) / "custom"
 mode = "split"                # レイアウト: auto / split / stack
 vcs = "git"                   # バージョン管理: git / jj / sl
-watch = false                 # diff 入力の変化を検知して自動リロード
+watch = true                  # diff 入力の変化を検知して自動リロード
 exclude_untracked = false     # 作業ツリーレビューで untracked を隠す
 line_numbers = true           # 行番号を表示
 wrap_lines = true             # 長い行を折り返す(false は切り詰め)

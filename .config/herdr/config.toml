@@ -7,3 +7,10 @@ name = "tokyo-night"
 prefix = "cmd+j"
 split_horizontal = "prefix+minus"
 split_vertical = "prefix+|"
+
+[[keys.command]]
+key = "prefix+L"
+type = "popup"
+command = "exec \"${SHELL|-sh}\""
+width = "80%"
+height = "80%"

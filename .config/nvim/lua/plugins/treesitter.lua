@@ -2,7 +2,7 @@
 -- nvim-ts-autotag が依存。HTML/JSX などのパーサを提供する。
 return {
   "nvim-treesitter/nvim-treesitter",
-  branch = "master",
+  branch = "main",
   build = ":TSUpdate",
   event = { "BufReadPost", "BufNewFile" },
   opts = {
