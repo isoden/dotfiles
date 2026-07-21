@@ -28,6 +28,25 @@
 "~/.claude/skills/japanese-tech-writing" = { source = "claude/skills/japanese-tech-writing", mode = "symlink" }
 "~/.claude/skills/plan-html"             = { source = "claude/skills/plan-html",             mode = "symlink" }
 
+# 実機の `defaults read` で確認できた「明示的にカスタマイズ済みの値」のみを記載する。
+# 未設定（OSデフォルトのまま）の項目は、意図した選択ではないため含めない。
+[bootstrap.macos.dock]
+autohide      = true
+magnification = false
+
+[bootstrap.macos.finder]
+preferred_view_style = "list"
+show_all_files        = true  # 隠しファイルを常に表示する
+
+[bootstrap.macos.trackpad]
+tap_to_click       = true
+three_finger_drag  = false
+
+# スクロール方向（自然なスクロール）は [bootstrap.macos.trackpad] に curated key が無いため、
+# NSGlobalDomain への raw defaults 指定で表現する。false = 出荷時のデフォルト(true)から反転済み。
+[bootstrap.macos.defaults]
+"NSGlobalDomain" = { "com.apple.swipescrolldirection" = false }
+
 [bootstrap.brew.taps]
 "olets/tap"    = "https://github.com/olets/homebrew-tap.git"
 "yusukebe/tap" = "https://github.com/yusukebe/homebrew-tap.git"
