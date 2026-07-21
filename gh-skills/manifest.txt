@@ -1,7 +1,7 @@
 # gh skill (https://cli.github.com/manual/gh_skill) で同期する Claude Code skills のマニフェスト。
 # 1行 1skill、空白区切りで: owner/repo skill-name commit-sha
 #
-# setup/gh-skills-dump.sh で現在の環境 (--scope user --agent claude-code) から生成する。
+# gh-skills/dump.sh で現在の環境 (--scope user --agent claude-code) から生成する。
 
 figma/mcp-server-guide figma-code-connect 07316dd2920d61303ca0e52812b31f5f341e7b15
 figma/mcp-server-guide figma-create-new-file 07316dd2920d61303ca0e52812b31f5f341e7b15

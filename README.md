@@ -13,7 +13,7 @@ Apple Silicon の macOS 専用。
 
 - dotfiles の symlink 化（`mise.toml` の `[dotfiles]`）
 - Homebrew パッケージのインストール（`mise.toml` + `mise.local.toml` の `[bootstrap.packages]`。mise 独自実装のため、実物の Homebrew CLI は必須ではありません）
-- GitHub 配布の Claude Code skills の同期（`setup/gh-skills.sh`）
+- GitHub 配布の Claude Code skills の同期（`gh-skills/sync.sh`）
 
 `~` 配下に内容の異なる既存ファイルがある場合は `.bak` への自動退避はせずエラー停止します。`mise bootstrap dotfiles status` で差分を確認してから、必要なら `mise bootstrap --force-dotfiles` で上書きしてください。
 
@@ -46,6 +46,6 @@ cask を追加するときは `brew-cask:`、カスタム tap の formula は `<
 ### GitHub 配布の Claude Code skills を同期する
 
 ```console
-./setup/gh-skills.sh        # setup/gh-skills.txt の内容で `gh skill install` を同期
-./setup/gh-skills-dump.sh   # 現在の環境 (user scope) を setup/gh-skills.txt に書き出す
+./gh-skills/sync.sh        # gh-skills/manifest.txt の内容で `gh skill install` を同期
+./gh-skills/dump.sh   # 現在の環境 (user scope) を gh-skills/manifest.txt に書き出す
 ```

@@ -4,7 +4,7 @@ set -euo pipefail
 
 # ${0:A:h:h} は $0 を絶対パス化(:A)し head を2回(:h:h)で祖父ディレクトリ = repo ルート
 REPO="${0:A:h:h}"
-MANIFEST="$REPO/setup/gh-skills.txt"
+MANIFEST="$REPO/gh-skills/manifest.txt"
 
 if ! command -v gh >/dev/null; then
   echo "gh コマンドが必要です" >&2
@@ -32,7 +32,7 @@ resolve_sha() {
   echo "# gh skill (https://cli.github.com/manual/gh_skill) で同期する Claude Code skills のマニフェスト。"
   echo "# 1行 1skill、空白区切りで: owner/repo skill-name commit-sha"
   echo "#"
-  echo "# setup/gh-skills-dump.sh で現在の環境 (--scope user --agent claude-code) から生成する。"
+  echo "# gh-skills/dump.sh で現在の環境 (--scope user --agent claude-code) から生成する。"
   echo
 
   # 区切り文字は @tsv (タブ) ではなく "|" を使う。zsh の read はタブ等の空白系 IFS

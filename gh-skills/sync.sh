@@ -4,7 +4,7 @@ set -euo pipefail
 
 # ${0:A:h:h} は $0 を絶対パス化(:A)し head を2回(:h:h)で祖父ディレクトリ = repo ルート
 REPO="${0:A:h:h}"
-MANIFEST="$REPO/setup/gh-skills.txt"
+MANIFEST="$REPO/gh-skills/manifest.txt"
 
 if ! command -v gh >/dev/null; then
   echo "gh コマンドが必要です (Brewfile 経由でインストールされます)" >&2
@@ -12,7 +12,10 @@ if ! command -v gh >/dev/null; then
 fi
 
 # マニフェストの各行を owner/repo skill-name commit-sha としてインストールする。
-# sha を明示指定することで、複数 PC 間で常に同じバージョンの skill が入る状態を保つ。
+# --pin で明示指定することで、複数 PC 間で常に同じバージョンの skill が入る状態を保つ。
+# `skill@sha` 構文だけでは pinned=false のままで、誰かが `gh skill update --all` を
+# 実行すると黙って上書きされてしまう不具合を実機で確認したため --pin を使う
+# (2026-07-22)。
 while IFS= read -r line || [ -n "$line" ]; do
   case "$line" in
     ''|'#'*) continue ;;
@@ -26,5 +29,5 @@ while IFS= read -r line || [ -n "$line" ]; do
   fi
 
   echo "install: $repo $skill@$sha"
-  gh skill install "$repo" "$skill@$sha" --agent claude-code --scope user --force
+  gh skill install "$repo" "$skill" --pin "$sha" --agent claude-code --scope user --force
 done < "$MANIFEST"
