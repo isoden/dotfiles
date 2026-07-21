@@ -27,3 +27,10 @@ keybind = super+8=unbind
 keybind = super+digit_8=unbind
 keybind = super+9=unbind
 keybind = super+digit_9=unbind
+
+# PC 固有設定（git 管理外）。存在すれば読み込み、共通設定を上書きできる。
+# `?` は対象ファイルが存在しなくてもエラーにしないための prefix。
+config-file = ?~/.ghostty.local
+
+background-opacity = 0.85
+background-blur-radius = 4
