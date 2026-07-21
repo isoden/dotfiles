@@ -1,0 +1,63 @@
+[dotfiles]
+"~/.zshrc"                     = { source = ".zshrc",                    mode = "symlink" }
+"~/.config/git/config"          = { source = ".config/git/config",        mode = "symlink" }
+"~/.config/git/ignore"          = { source = ".config/git/ignore",        mode = "symlink" }
+"~/.config/nvim"                = { source = ".config/nvim",              mode = "symlink" }
+"~/.config/ghostty/config"      = { source = ".config/ghostty/config",    mode = "symlink" }
+"~/.config/mise/config.toml"    = { source = ".config/mise/config.toml",  mode = "symlink" }
+"~/.config/herdr/config.toml"   = { source = ".config/herdr/config.toml", mode = "symlink" }
+"~/.config/hunk/config.toml"    = { source = ".config/hunk/config.toml",  mode = "symlink" }
+"~/.claude/CLAUDE.md"           = { source = "claude/CLAUDE.md",          mode = "symlink" }
+"~/.claude/agents"               = { source = "claude/agents",            mode = "symlink-each" }
+# claude/hooks・claude/scripts は現状未作成。mise の [dotfiles] は source が
+# 存在しないエントリがあると apply 全体がエラーで停止するため、実体ができてから追加する。
+
+# claude/skills は各 skill がサブディレクトリ (中に SKILL.md 等) を持つ2階層構造。
+# symlink-each をここに使うと、既にディレクトリ全体が symlink 化済みのエントリに対して
+# 再帰的にファイル単位で ln -sf をかけようとし、symlink を辿った先の実ファイルへ
+# 自己参照 symlink を作って中身を破壊する（2026-07-21 実機検証で plan-html/SKILL.md が
+# 実際に破壊され、git checkout で復元した）。挙動が不安定で公式ドキュメントにも
+# ネスト構造での仕様記載が無いため、各 skill を個別の symlink エントリとして列挙する。
+# 新しい skill を claude/skills/ に追加したら、ここにも1行追記すること。
+#
+# css-core-architecture は .gitignore 対象 (git 管理外) のため意図的にここへ含めない。
+# 含めると、このディレクトリを持たない別マシンで clone した際に source missing で
+# bootstrap 全体が止まる。使うマシンでは手動で `ln -s` するか、この行を一時的に足す。
+# "~/.claude/skills/css-core-architecture" = { source = "claude/skills/css-core-architecture", mode = "symlink" }
+"~/.claude/skills/deep-understanding"    = { source = "claude/skills/deep-understanding",    mode = "symlink" }
+"~/.claude/skills/japanese-tech-writing" = { source = "claude/skills/japanese-tech-writing", mode = "symlink" }
+"~/.claude/skills/plan-html"             = { source = "claude/skills/plan-html",             mode = "symlink" }
+
+[bootstrap.brew.taps]
+"olets/tap"    = "https://github.com/olets/homebrew-tap.git"
+"yusukebe/tap" = "https://github.com/yusukebe/homebrew-tap.git"
+
+[bootstrap.packages]
+"brew:direnv"                  = "latest"
+"brew:eza"                     = "latest"
+"brew:ffmpeg"                  = "latest"
+"brew:fzf"                     = "latest"
+"brew:gh"                      = "latest"
+"brew:git"                     = "latest"
+"brew:herdr"                   = "latest"
+"brew:hunk"                    = "latest"
+"brew:lazygit"                 = "latest"
+"brew:libpq"                   = "latest"
+"brew:mkcert"                  = "latest"
+"brew:neovim"                  = "latest"
+"brew:ni"                      = "latest"
+"brew:pinact"                  = "latest"
+"brew:ripgrep"                 = "latest"
+"brew:tig"                     = "latest"
+"brew:olets/tap/zsh-abbr"      = "latest"
+"brew:yusukebe/tap/ax"         = "latest"
+"brew-cask:1password-cli"      = "latest"
+"brew-cask:codex"              = "latest"
+"brew-cask:font-hackgen-nerd"  = "latest"
+"brew-cask:ghostty"            = "latest"
+"brew-cask:visual-studio-code" = "latest"
+
+[tasks.bootstrap]
+description = "gh skill install で GitHub 配布の Claude Code skills を同期する（mise 管理対象外）"
+run = "./setup/gh-skills.sh"
+dir = "{{config_root}}"

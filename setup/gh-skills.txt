@@ -1,8 +1,20 @@
 # gh skill (https://cli.github.com/manual/gh_skill) で同期する Claude Code skills のマニフェスト。
 # 1行 1skill、空白区切りで: owner/repo skill-name commit-sha
 #
-# sha はインストール後に以下で確認できる:
-#   gh skill list --json skillName,sourceURL,version --agent claude-code --scope user
-#
-# 例:
-# vercel-labs/agent-skills web-design-guidelines 1a2b3c4d5e6f7890abcdef1234567890abcdef12
+# setup/gh-skills-dump.sh で現在の環境 (--scope user --agent claude-code) から生成する。
+
+figma/mcp-server-guide figma-code-connect 07316dd2920d61303ca0e52812b31f5f341e7b15
+figma/mcp-server-guide figma-create-new-file 07316dd2920d61303ca0e52812b31f5f341e7b15
+figma/mcp-server-guide figma-generate-design 07316dd2920d61303ca0e52812b31f5f341e7b15
+figma/mcp-server-guide figma-generate-diagram 07316dd2920d61303ca0e52812b31f5f341e7b15
+figma/mcp-server-guide figma-generate-library 07316dd2920d61303ca0e52812b31f5f341e7b15
+figma/mcp-server-guide figma-use 07316dd2920d61303ca0e52812b31f5f341e7b15
+figma/mcp-server-guide figma-use-figjam 07316dd2920d61303ca0e52812b31f5f341e7b15
+figma/mcp-server-guide figma-use-slides 07316dd2920d61303ca0e52812b31f5f341e7b15
+GoogleChrome/modern-web-guidance modern-web-guidance 79aae1e0bed948e48fd78b58538c5ee1e6463da9
+mattpocock/skills productivity/grill-me 2454c95dc305c158b21a0cdafeb728879dd0359a
+remix-run/agent-skills react-router-framework-mode 33578aae4aa36a90c9f8f602105a1ccb0f4efe45
+vercel-labs/agent-skills composition-patterns 4559f18a20c1691c744b4395194290db6a0df5e9
+vercel-labs/agent-skills react-best-practices 4559f18a20c1691c744b4395194290db6a0df5e9
+vercel-labs/agent-skills react-view-transitions 4559f18a20c1691c744b4395194290db6a0df5e9
+vercel-labs/agent-skills web-design-guidelines 4559f18a20c1691c744b4395194290db6a0df5e9

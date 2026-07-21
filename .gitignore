@@ -1,6 +1,6 @@
 # PC 固有 (会社/個人それぞれのマシン専用) のツールを書く場所。
-# setup/brew.sh が共有 Brewfile とマージして扱う。
-/.homebrew/Brewfile.local
+# mise.toml の [bootstrap.packages] とキー単位でマージされる。
+/mise.local.toml
 
 # 2026-07-15: 同僚作の skill（ライセンス未確認）のため public リポジトリに含めない。
 # ローカルでは ~/.claude/skills/ への symlink 経由で利用する。

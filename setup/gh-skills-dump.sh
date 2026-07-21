@@ -35,9 +35,18 @@ resolve_sha() {
   echo "# setup/gh-skills-dump.sh で現在の環境 (--scope user --agent claude-code) から生成する。"
   echo
 
+  # 区切り文字は @tsv (タブ) ではなく "|" を使う。zsh の read はタブ等の空白系 IFS
+  # 文字を特別扱いし、連続する区切り文字をまとめて先頭の空フィールドを潰してしまう
+  # ため、sourceURL が空のエントリでフィールドがずれるバグを踏んだ (2026-07-22)。
   gh skill list --agent claude-code --scope user --json skillName,sourceURL,version \
-    | jq -r '.[] | [(.sourceURL | sub("^https://github.com/"; "") | sub("\\.git$"; "")), .skillName, .version] | @tsv' \
-    | while IFS=$'\t' read -r repo skill version; do
+    | jq -r '.[] | [(.sourceURL | sub("^https://github.com/"; "") | sub("\\.git$"; "")), .skillName, .version] | join("|")' \
+    | while IFS='|' read -r repo skill version; do
+        # sourceURL が空 = gh skill install 以外の経路 (Claude Code 組み込み skill 等)
+        # で入ったもの。gh skill install で再現できないためマニフェストの対象外。
+        if [ -z "$repo" ]; then
+          echo "sourceURL 不明のためスキップ: $skill" >&2
+          continue
+        fi
         sha="$(resolve_sha "$repo" "$version")"
         echo "$repo $skill $sha"
       done \
