@@ -11,6 +11,20 @@ split_vertical = "prefix+|"
 [[keys.command]]
 key = "prefix+L"
 type = "popup"
-command = "exec \"${SHELL|-sh}\""
-width = "80%"
-height = "80%"
+command = "exec \"${SHELL:-sh}\""
+width = "90%"
+height = "90%"
+
+[[keys.command]]
+key = "prefix+H"
+type = "popup"
+command = "hunk diff"
+width = "90%"
+height = "90%"
+
+[[keys.command]]
+key = "prefix+G"
+type = "popup"
+command = "lazygit"
+width = "90%"
+height = "90%"
