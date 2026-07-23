@@ -5,4 +5,7 @@
 # ZDOTREPO は .zshrc がリポジトリルート（${0:A:h}）として定義する。
 export ABBR_USER_ABBREVIATIONS_FILE="$ZDOTREPO/.config/zsh-abbr/user-abbreviations"
 
-source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
+# 新規マシンで mise bootstrap 未実行のまま最初のシェルが起動しても落ちないようガードする。
+if [[ -f "$ZSH_ABBR_DIR/zsh-abbr.zsh" ]]; then
+  source "$ZSH_ABBR_DIR/zsh-abbr.zsh"
+fi

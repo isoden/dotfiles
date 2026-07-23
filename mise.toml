@@ -47,10 +47,6 @@ three_finger_drag  = false
 [bootstrap.macos.defaults]
 "NSGlobalDomain" = { "com.apple.swipescrolldirection" = false }
 
-[bootstrap.brew.taps]
-"olets/tap"    = "https://github.com/olets/homebrew-tap.git"
-"yusukebe/tap" = "https://github.com/yusukebe/homebrew-tap.git"
-
 [bootstrap.packages]
 "brew:direnv"                  = "latest"
 "brew:eza"                     = "latest"
@@ -68,8 +64,8 @@ three_finger_drag  = false
 "brew:pinact"                  = "latest"
 "brew:ripgrep"                 = "latest"
 "brew:tig"                     = "latest"
-"brew:olets/tap/zsh-abbr"      = "latest"
-"brew:yusukebe/tap/ax"         = "latest"
+# zsh-abbr・ax は Homebrew 非依存に移行済み。理由・導入方法は manual-tools/sync.sh と
+# CLAUDE.md を参照。
 "brew-cask:1password-cli"      = "latest"
 "brew-cask:codex"              = "latest"
 "brew-cask:font-hackgen-nerd"  = "latest"
@@ -77,6 +73,9 @@ three_finger_drag  = false
 "brew-cask:visual-studio-code" = "latest"
 
 [tasks.bootstrap]
-description = "gh skill install で GitHub 配布の Claude Code skills を同期する（mise 管理対象外）"
-run = "./gh-skills/sync.sh"
+description = "brew非依存ツール(zsh-abbr, ax)とGitHub配布skillsを同期する（mise管理対象外）"
+run = [
+  "./manual-tools/sync.sh",
+  "./gh-skills/sync.sh",
+]
 dir = "{{config_root}}"

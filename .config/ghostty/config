@@ -1,7 +1,8 @@
 # ===== Ghostty 設定 =====
 
 # フォント。HackGen35 Console NF (Nerd Font 版)。
-# `brew install font-hackgen-nerd` で導入。
+# mise.toml の [bootstrap.packages]（brew-cask:font-hackgen-nerd）で管理。
+# `mise bootstrap packages apply` で導入。
 font-family = HackGen35 Console NF
 
 # Cmd+数字を端末アプリ(Neovim)へ渡すための unbind。

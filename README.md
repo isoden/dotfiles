@@ -13,6 +13,7 @@ Apple Silicon の macOS 専用。
 
 - dotfiles の symlink 化（`mise.toml` の `[dotfiles]`）
 - Homebrew パッケージのインストール（`mise.toml` + `mise.local.toml` の `[bootstrap.packages]`。mise 独自実装のため、実物の Homebrew CLI は必須ではありません）
+- Homebrew 非依存ツール(zsh-abbr, ax) の同期（`manual-tools/sync.sh`）
 - GitHub 配布の Claude Code skills の同期（`gh-skills/sync.sh`）
 
 `~` 配下に内容の異なる既存ファイルがある場合は `.bak` への自動退避はせずエラー停止します。`mise bootstrap dotfiles status` で差分を確認してから、必要なら `mise bootstrap --force-dotfiles` で上書きしてください。
@@ -41,7 +42,13 @@ mise bootstrap packages use -p mise.local.toml brew:ollama   # このPCだけ (m
 
 `-p` を省略すると実行ディレクトリの `mise.toml`（全PC共通）に書き込まれます。PC固有パッケージを追加するときは必ず `-p mise.local.toml` を明示してください。
 
-cask を追加するときは `brew-cask:`、カスタム tap の formula は `<tap>/<name>` を指定します（例: `brew-cask:firefox`、`brew:yusukebe/tap/ax`）。
+cask を追加するときは `brew-cask:` を指定します（例: `brew-cask:firefox`）。カスタム tap の formula（`<tap>/<name>` 形式）は既知の制約で追加できないため、CLAUDE.md を参照してください。
+
+### brew非依存ツール(zsh-abbr, ax)を同期する
+
+```console
+./manual-tools/sync.sh     # ax・zsh-abbr を pin バージョンでインストール/更新
+```
 
 ### GitHub 配布の Claude Code skills を同期する
 

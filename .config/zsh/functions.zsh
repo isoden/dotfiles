@@ -9,7 +9,7 @@ precmd() {
 }
 
 function up() {
-  brew update && brew upgrade && brew cleanup && brew doctor
+  mise bootstrap packages upgrade
 }
 
 function beep() {
