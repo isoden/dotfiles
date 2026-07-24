@@ -24,9 +24,13 @@
 # 含めると、このディレクトリを持たない別マシンで clone した際に source missing で
 # bootstrap 全体が止まる。使うマシンでは手動で `ln -s` するか、この行を一時的に足す。
 # "~/.claude/skills/css-core-architecture" = { source = "claude/skills/css-core-architecture", mode = "symlink" }
+"~/.claude/skills/compare-html"          = { source = "claude/skills/compare-html",          mode = "symlink" }
 "~/.claude/skills/deep-understanding"    = { source = "claude/skills/deep-understanding",    mode = "symlink" }
+"~/.claude/skills/explainer-html"        = { source = "claude/skills/explainer-html",        mode = "symlink" }
+"~/.claude/skills/html-design-system"   = { source = "claude/skills/html-design-system",   mode = "symlink" }
 "~/.claude/skills/japanese-tech-writing" = { source = "claude/skills/japanese-tech-writing", mode = "symlink" }
 "~/.claude/skills/plan-html"             = { source = "claude/skills/plan-html",             mode = "symlink" }
+"~/.claude/skills/review-html"           = { source = "claude/skills/review-html",           mode = "symlink" }
 
 # 実機の `defaults read` で確認できた「明示的にカスタマイズ済みの値」のみを記載する。
 # 未設定（OSデフォルトのまま）の項目は、意図した選択ではないため含めない。
