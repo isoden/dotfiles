@@ -15,3 +15,8 @@ function up() {
 function beep() {
   afplay /System/Library/Sounds/Ping.aiff
 }
+
+# 親ディレクトリが存在しない深い階層でも touch できるようにする
+function touchp() {
+  mkdir -p "${1:h}" && touch "$1"
+}

@@ -9,6 +9,20 @@ return {
   },
   -- キー入力 or :Neotree コマンドで初めて読み込む（起動を軽く保つ）
   cmd = "Neotree",
+  -- init は遅延ロードの有無に関わらず起動時に必ず実行される（lazy.nvim の仕様）。
+  -- ここで VimEnter フックだけ先に登録しておき、実際のプラグイン本体は
+  -- 発火時に :Neotree コマンド経由で遅延ロードさせる。
+  init = function()
+    vim.api.nvim_create_autocmd("VimEnter", {
+      once = true,
+      -- VimEnter 直後は他プラグイン（dashboard 等）のバッファ/ウィンドウ確定より
+      -- 早く走ることがあり、その状態で開くとエラーになることがあるため
+      -- schedule で1 tick 遅らせる（コミュニティで広く使われる回避策）。
+      callback = vim.schedule_wrap(function()
+        vim.cmd("Neotree show")
+      end),
+    })
+  end,
   keys = {
     -- VSCode ライクに Cmd+B でツリーをトグル
     { "<D-b>", "<cmd>Neotree toggle<cr>", mode = { "n", "i", "v", "t" }, desc = "Neo-tree をトグル" },
@@ -28,6 +42,14 @@ return {
         never_show = {
           ".git",      -- .git ディレクトリは常に非表示（H トグルでも表示しない）
           ".DS_Store", -- macOS のメタデータファイルは常に非表示（H トグルでも表示しない）
+        },
+      },
+      window = {
+        mappings = {
+          -- デフォルトの H (toggle_hidden) はランタイムで hide_dotfiles を反転させ、
+          -- 上の hide_dotfiles=false を無効化してしまう。誤操作で不可視ファイルが
+          -- 消えるのを防ぐため、このトグル自体を無効化する（2026-07-25）。
+          ["H"] = "noop",
         },
       },
     },
