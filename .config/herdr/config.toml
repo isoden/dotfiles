@@ -8,6 +8,9 @@ prefix = "cmd+j"
 split_horizontal = "prefix+minus"
 split_vertical = "prefix+|"
 
+[experimental]
+kitty_graphics = true
+
 [[keys.command]]
 key = "prefix+L"
 type = "popup"
@@ -28,3 +31,9 @@ type = "popup"
 command = "lazygit"
 width = "90%"
 height = "90%"
+
+[[keys.command]]
+key = "prefix+b"
+type = "shell"
+command = '"${HERDR_BIN_PATH}" plugin pane open --plugin official.browser --entrypoint browser --placement split --direction right --focus'
+description = "open browser in right split"

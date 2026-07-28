@@ -9,7 +9,7 @@ precmd() {
 }
 
 function up() {
-  mise bootstrap packages upgrade
+  (cd "$ZDOTREPO" && mise bootstrap packages upgrade)
 }
 
 function beep() {
