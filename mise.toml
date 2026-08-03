@@ -68,6 +68,10 @@ three_finger_drag  = false
 "brew:pinact"                  = "latest"
 "brew:ripgrep"                 = "latest"
 "brew:tig"                     = "latest"
+# nvim-treesitter の main ブランチがパーサのビルドに要求する CLI（0.26.1 以降）。
+# ライブラリ側の formula "tree-sitter" には bin/ が無く CLI は含まれないため、
+# 別 formula の "tree-sitter-cli" を明示的に宣言する必要がある。
+"brew:tree-sitter-cli"         = "latest"
 # zsh-abbr・ax は Homebrew 非依存に移行済み。理由・導入方法は manual-tools/sync.sh と
 # CLAUDE.md を参照。
 "brew-cask:1password-cli"      = "latest"
