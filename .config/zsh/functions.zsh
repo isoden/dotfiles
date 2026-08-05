@@ -9,7 +9,11 @@ precmd() {
 }
 
 function up() {
-  (cd "$ZDOTREPO" && mise bootstrap packages upgrade)
+  # mise 本体を先に更新してから packages upgrade を回す。
+  # bootstrap の brew backend は mise 独自実装なので、本体が古いと
+  # パッケージ側の更新挙動も古いままになるため順序が重要。
+  # -y は確認プロンプトを抑止する（up は非対話で一気に流す用途）。
+  mise self-update -y && (cd "$ZDOTREPO" && mise bootstrap packages upgrade)
 }
 
 function beep() {
