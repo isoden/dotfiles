@@ -39,6 +39,13 @@ return {
       use_libuv_file_watcher = true,            -- OS のファイル監視で自動更新
       filtered_items = {
         hide_dotfiles = false, -- ドット始まりの不可視ファイルも常に表示
+        -- 2026-08-05: hide_dotfiles=false だけでは .env / node_modules / .expo 等が
+        -- 消える問題が残っていた。neo-tree のデフォルトは hide_gitignored=true・
+        -- hide_ignored=true（defaults.lua）で、これらは hide_dotfiles とは独立に
+        -- 効くため。ツリーは「ディスク上の実体をそのまま見るもの」という位置づけに
+        -- するので、gitignore 由来の非表示も止める。
+        hide_gitignored = false, -- .gitignore 対象も表示
+        hide_ignored = false,    -- .ignore / .neotreeignore 対象も表示
         never_show = {
           ".git",      -- .git ディレクトリは常に非表示（H トグルでも表示しない）
           ".DS_Store", -- macOS のメタデータファイルは常に非表示（H トグルでも表示しない）
@@ -46,9 +53,15 @@ return {
       },
       window = {
         mappings = {
-          -- デフォルトの H (toggle_hidden) はランタイムで hide_dotfiles を反転させ、
-          -- 上の hide_dotfiles=false を無効化してしまう。誤操作で不可視ファイルが
-          -- 消えるのを防ぐため、このトグル自体を無効化する（2026-07-25）。
+          -- デフォルトの H は toggle_hidden = filtered_items.visible の反転で、
+          -- 上の hide_* 設定を書き換えるわけではない（2026-07-25 のコメントに
+          -- 「hide_dotfiles を反転させる」とあったのは誤り。実装は
+          -- sources/filesystem/commands.lua の toggle_hidden を参照）。
+          -- 上の設定で既に全て表示されるためトグルの用途が無く、ツリー操作中の
+          -- 誤爆で表示が揺れるのを避けるため無効化したままにする。
+          -- なお "noop" は neo-tree 側で「キーを登録しない」と解釈される
+          -- （ui/renderer.lua の falsy mapping 判定）。再表示手段が要るときは
+          -- この行を消せば H が復活する。
           ["H"] = "noop",
         },
       },
